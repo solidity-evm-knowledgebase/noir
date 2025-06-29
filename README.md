@@ -10,10 +10,21 @@
 - nargo will compile our circuits to create ACIR, the intermediate representation used by the backend.
 - Execute creates the witness (it will also compile the circuits)
 
+#### Commands
+- `nargo check`: Check the Noir code. Are you using your variables and types correctly? It checks any dependencies being used, and checks all of the functions and circuits are well formed. (without having to compile/generate proofs). It will create `Prover.toml` file.
+- `nargo compile`: Will generate the ACIR file without actually creating a proof.
+- `nargo execute`: Will compile into ACIR, execute the circuits with the inputs, and compute a witness.
+
 ### Barretenberg (backend)
 
 - Using the backend, we can generate proofs and verify those proofs, by using the witness and ACIR files we generated.
 - Verification can be done either offchain or onchain (via Verify smart contract).
+
+#### Commands:
+
+- `bb prove -b ./target/simple_circuit.json -w ./target/simple_circuit -o ./target`: Generate the proof. -b is path to ACIR file, -w is path to witness file, -o target path for the proof. By default, it will use ultra_honk scheme.
+- `bb write_vk -b ./target/simple_circuit.json -o ./target`: Will generate a verification key. Small cryptographic object that allows the verifier to check the validity of a proof without having to rerun the full computations. It's generated from the ACIR.
+- `bb verify -k ./target/vk -p ./target/proof`: Verify proof using the verification key. 
 
 ## Project Types and Layout
 
