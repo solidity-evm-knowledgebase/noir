@@ -46,3 +46,16 @@ Inputs by default are private in Noir. To make them public use the `pub` keyword
 
 - Most common is `Field` type. Essentially, it's an integer with a maximum value defined by the field modulur (or field size). Supports integer arithmetic.
 - The exception to use Integers instead of Fields is when we have something related to ordering, like `greater than` and `less than`.
+
+## Depencies
+
+- To use a dependecy, add it under dependencies in the Nargo.toml file like this:
+```toml
+[dependencies]
+ecrecover = {tag = "v0.8.0", git = "https://github.com/colinnielsen/ecrecover-noir"}
+```
+
+- Then you can use it in the circuit by using the `use` kewyword and specifying `dep` like this:
+```noir
+use dep::ecrecover;
+```
