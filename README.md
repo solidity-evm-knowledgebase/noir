@@ -24,7 +24,9 @@
 
 - `bb prove -b ./target/simple_circuit.json -w ./target/simple_circuit -o ./target`: Generate the proof. -b is path to ACIR file, -w is path to witness file, -o target path for the proof. By default, it will use ultra_honk scheme.
 - `bb write_vk -b ./target/simple_circuit.json -o ./target`: Will generate a verification key. Small cryptographic object that allows the verifier to check the validity of a proof without having to rerun the full computations. It's generated from the ACIR.
-- `bb verify -k ./target/vk -p ./target/proof`: Verify proof using the verification key. 
+- `bb write_vk --oracle_hash keccak -b ./target/simple_circuit.json -o ./target`: This will generate a verification key using keccak hashing algorithms, which is more optimized for use onchain than poseidon for example.
+- `bb verify -k ./target/vk -p ./target/proof`: Verify proof using the verification key.
+- `bb write_solidity_verifier -k ./target/vk -o ./target/Verifier.sol`: This will generate a verifier smart contract.
 
 ## Project Types and Layout
 
